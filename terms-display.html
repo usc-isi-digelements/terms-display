@@ -51,18 +51,19 @@ var collection = {
         width: 100%;
       }
 
-      .data {
-        /* Horizontally align the left of the data with the left of text in the collapsed view */
+      .term {
+        /* Vertically align the breadbox-item with the tall text (line-height of 40px). */
+        margin-bottom: 4px;
+        margin-top: 4px;
+        /* Horizontally align the left of the breadbox-item with the left of the text in the collapsed view. */
         /* Note that the breadbox-item elements have a default margin of 3px */
-        margin-left: 7px;
+        margin-left: 2px;
       }
 
       .styled-dialog-name,
       .styled-dialog-text {
-        line-height: 30px;
-        min-height: 30px;
-        /* Horizontally align the left of the text with the left of data in the collapsed view */
-        margin-left: 10px;
+        /* Horizontally align the left of the text with the left of the breadbox-item in the collapsed view. */
+        margin-left: 5px;
       }
 
       iron-icon {
@@ -84,7 +85,7 @@ var collection = {
               <iron-icon class$="[[iconStyleClass]]" icon="[[icon]]"></iron-icon>
             </template>
           </div>
-          <div class="layout wrap data">
+          <div class="layout wrap term">
             <template is="dom-repeat" items="[[_getKeys(collection.*)]]" as="key">
               <template is="dom-repeat" items="[[_getList(key, collection.*)]]">
                 <breadbox-item text="[[key]]: [[item]]" title$="[[key]]: [[item]]"></breadbox-item>
@@ -98,7 +99,7 @@ var collection = {
     <template is="dom-if" if="[[!nameValue]]">
       <div class="layout horizontal">
         <div class="styled-dialog-name styled-dialog-tall styled-dialog-right-space">[[termLabel]]</div>
-        <div class="layout wrap data">
+        <div class="layout wrap term">
           <template is="dom-repeat" items="[[_getKeys(collection.*)]]" as="key">
             <template is="dom-repeat" items="[[_getList(key, collection.*)]]">
               <breadbox-item text="[[key]]: [[item]]" title$="[[key]]: [[item]]"></breadbox-item>
