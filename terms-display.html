@@ -44,7 +44,8 @@ var collection = {
 
 <dom-module id="terms-display">
   <template>
-    <style include="iron-flex"></style>
+    <style include="iron-flex iron-flex-alignment"></style>
+
     <style>
       :host {
         display: block;
@@ -52,9 +53,6 @@ var collection = {
       }
 
       .term {
-        /* Vertically align the breadbox-item with the tall text (line-height of 40px). */
-        margin-bottom: 4px;
-        margin-top: 4px;
         /* Horizontally align the left of the breadbox-item with the left of the text in the collapsed view. */
         /* Note that the breadbox-item elements have a default margin of 3px */
         margin-left: 2px;
@@ -62,6 +60,8 @@ var collection = {
 
       .styled-dialog-name,
       .styled-dialog-text {
+        line-height: 30px;
+        margin-right: 5px;
         /* Horizontally align the left of the text with the left of the breadbox-item in the collapsed view. */
         margin-left: 5px;
       }
@@ -75,12 +75,12 @@ var collection = {
     <template is="dom-if" if="[[nameValue]]">
       <div class="layout horizontal">
         <div class="layout vertical">
-          <div class="styled-dialog-name styled-dialog-tall styled-dialog-right-space">[[nameLabel]]</div>
-          <div class="styled-dialog-name styled-dialog-tall styled-dialog-right-space">[[termLabel]]</div>
+          <div class="styled-dialog-name">[[nameLabel]]</div>
+          <div class="styled-dialog-name">[[termLabel]]</div>
         </div>
         <div class="layout vertical">
-          <div class="layout horizontal">
-            <div class="styled-dialog-text styled-dialog-tall styled-dialog-right-space">[[nameValue]]</div>
+          <div class="layout horizontal center">
+            <div class="styled-dialog-text">[[nameValue]]</div>
             <template is="dom-if" if="[[icon]]" restamp="true">
               <iron-icon class$="[[iconStyleClass]]" icon="[[icon]]"></iron-icon>
             </template>
@@ -98,7 +98,7 @@ var collection = {
 
     <template is="dom-if" if="[[!nameValue]]">
       <div class="layout horizontal">
-        <div class="styled-dialog-name styled-dialog-tall styled-dialog-right-space">[[termLabel]]</div>
+        <div class="styled-dialog-name">[[termLabel]]</div>
         <div class="layout wrap term">
           <template is="dom-repeat" items="[[_getKeys(collection.*)]]" as="key">
             <template is="dom-repeat" items="[[_getList(key, collection.*)]]">

@@ -18,70 +18,72 @@ limitations under the License.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
   <link rel="import" href="../terms-display.html">
 </head>
 
 <body unresolved>
-  <template is="dom-bind" id="demo">
-    <p>Example 1</p>
-    <p>Collection:  [[stringify(collection1)]]</p>
-    <p>Terms Display:</p>
-    <terms-display collection="[[collection1]]"></terms-display>
-    <p>Example 2</p>
-    <p>Collection:  [[stringify(collection2)]]</p>
-    <p>Terms Display:</p>
-    <terms-display collection="[[collection2]]"></terms-display>
-    <p>Example 3</p>
-    <p>Collection:  [[stringify(collection3)]]</p>
-    <p>Name Value:  1234</p>
-    <p>Terms Display:</p>
-    <terms-display collection="[[collection3]]" name-value="1234"></terms-display>
-    <p>Example 4</p>
-    <p>Collection:  [[stringify(collection4)]]</p>
-    <p>Name Label:  ID</p>
-    <p>Name Value:  1234</p>
-    <p>Terms Display:</p>
-    <terms-display collection="[[collection4]]" name-label="ID" name-value="1234"></terms-display>
-    <p>Example 5</p>
-    <p>Collection:  [[stringify(collection5)]]</p>
-    <p>Name Label:  ID</p>
-    <p>Name Value:  1234</p>
-    <p>Icon:  polymer</p>
-    <p>Terms Display:</p>
-    <terms-display collection="[[collection5]]" name-label="ID" name-value="1234" icon="polymer"></terms-display>
-    <p>Example 6</p>
-    <p>Collection:  [[stringify(collection6)]]</p>
-    <p>Term Label:  Data</p>
-    <p>Terms Display:</p>
-    <terms-display collection="[[collection6]]" term-label="Data"></terms-display>
-  </template>
+  <dom-bind id="demo">
+    <script>
+      (function(document) {
+        var demo = document.querySelector('#demo');
+        demo.collection1 = {};
+        demo.collection2 = {
+          Term1: ['Value1']
+        };
+        demo.collection3 = {
+          Term1: ['Value1']
+        };
+        demo.collection4 = {
+          Term1: ['Value1', 'Value2']
+        };
+        demo.collection5 = {
+          Term1: ['Value1', 'Value2'],
+          Term2: []
+        };
+        demo.collection6 = {
+          Term1: ['Value1', 'Value2'],
+          Term2: ['Value3', 'Value4']
+        };
+        demo.stringify = function(object) {
+          return JSON.stringify(object);
+        };
+      })(document);
+    </script>
 
-  <script>
-    (function(document) {
-      var demo = document.querySelector('#demo');
-      demo.collection1 = {};
-      demo.collection2 = {
-        Term1: ['Value1']
-      };
-      demo.collection3 = {
-        Term1: ['Value1']
-      };
-      demo.collection4 = {
-        Term1: ['Value1', 'Value2']
-      };
-      demo.collection5 = {
-        Term1: ['Value1', 'Value2'],
-        Term2: []
-      };
-      demo.collection6 = {
-        Term1: ['Value1', 'Value2'],
-        Term2: ['Value3', 'Value4']
-      };
-      demo.stringify = function(object) {
-        return JSON.stringify(object);
-      };
-    })(document);
-  </script>
+    <template is="dom-bind">
+      <h3>Demo 1</h3>
+      <p>Collection:  [[stringify(collection1)]]</p>
+      <p>Terms Display:</p>
+      <terms-display collection="[[collection1]]"></terms-display>
+      <h3>Demo 2</h3>
+      <p>Collection:  [[stringify(collection2)]]</p>
+      <p>Terms Display:</p>
+      <terms-display collection="[[collection2]]"></terms-display>
+      <h3>Demo 3</h3>
+      <p>Collection:  [[stringify(collection3)]]</p>
+      <p>Name Value:  1234</p>
+      <p>Terms Display:</p>
+      <terms-display collection="[[collection3]]" name-value="1234"></terms-display>
+      <h3>Demo 4</h3>
+      <p>Collection:  [[stringify(collection4)]]</p>
+      <p>Name Label:  ID</p>
+      <p>Name Value:  1234</p>
+      <p>Terms Display:</p>
+      <terms-display collection="[[collection4]]" name-label="ID" name-value="1234"></terms-display>
+      <h3>Demo 5</h3>
+      <p>Collection:  [[stringify(collection5)]]</p>
+      <p>Name Label:  ID</p>
+      <p>Name Value:  1234</p>
+      <p>Icon:  polymer</p>
+      <p>Terms Display:</p>
+      <terms-display collection="[[collection5]]" name-label="ID" name-value="1234" icon="polymer"></terms-display>
+      <h3>Demo 6</h3>
+      <p>Collection:  [[stringify(collection6)]]</p>
+      <p>Term Label:  Data</p>
+      <p>Terms Display:</p>
+      <terms-display collection="[[collection6]]" term-label="Data"></terms-display>
+    </template>
+  </dom-bind>
 </body>
 </html>
