@@ -32,16 +32,13 @@ limitations under the License.
           Term1: ['Value1']
         };
         demo.collection3 = {
-          Term1: ['Value1']
-        };
-        demo.collection4 = {
           Term1: ['Value1', 'Value2']
         };
-        demo.collection5 = {
+        demo.collection4 = {
           Term1: ['Value1', 'Value2'],
           Term2: []
         };
-        demo.collection6 = {
+        demo.collection5 = {
           Term1: ['Value1', 'Value2'],
           Term2: ['Value3', 'Value4']
         };
@@ -62,27 +59,16 @@ limitations under the License.
       <terms-display collection="[[collection2]]"></terms-display>
       <h3>Demo 3</h3>
       <p>Collection:  [[stringify(collection3)]]</p>
-      <p>Name Value:  1234</p>
       <p>Terms Display:</p>
-      <terms-display collection="[[collection3]]" name-value="1234"></terms-display>
+      <terms-display collection="[[collection3]]"></terms-display>
       <h3>Demo 4</h3>
       <p>Collection:  [[stringify(collection4)]]</p>
-      <p>Name Label:  ID</p>
-      <p>Name Value:  1234</p>
       <p>Terms Display:</p>
-      <terms-display collection="[[collection4]]" name-label="ID" name-value="1234"></terms-display>
+      <terms-display collection="[[collection4]]"></terms-display>
       <h3>Demo 5</h3>
       <p>Collection:  [[stringify(collection5)]]</p>
-      <p>Name Label:  ID</p>
-      <p>Name Value:  1234</p>
-      <p>Icon:  polymer</p>
       <p>Terms Display:</p>
-      <terms-display collection="[[collection5]]" name-label="ID" name-value="1234" icon="polymer"></terms-display>
-      <h3>Demo 6</h3>
-      <p>Collection:  [[stringify(collection6)]]</p>
-      <p>Term Label:  Data</p>
-      <p>Terms Display:</p>
-      <terms-display collection="[[collection6]]" term-label="Data"></terms-display>
+      <terms-display collection="[[collection5]]"></terms-display>
     </template>
   </dom-bind>
 </body>

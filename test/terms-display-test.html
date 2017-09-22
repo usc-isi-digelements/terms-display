@@ -42,23 +42,6 @@ limitations under the License.
 
       test('does have correct default properties', function() {
         assert.isUndefined(element.collection);
-        assert.equal(element.nameLabel, 'Name');
-        assert.equal(element.nameValue, '');
-        assert.equal(element.icon, '');
-        assert.equal(element.iconStyleClass, '');
-        assert.equal(element.termLabel, 'Term');
-      });
-
-      test('does not have icon if name value is not defined', function() {
-        assert.isNull(element.$$('iron-icon'));
-      });
-
-      test('does have icon if name value is defined', function(done) {
-        element.nameValue = 'Test';
-        flush(function() {
-          assert.isDefined(element.$$('iron-icon'));
-          done();
-        });
       });
 
       test('does not have breadbox-item if collection is not defined', function() {
@@ -90,7 +73,6 @@ limitations under the License.
           one: ['a', 'b'],
           two: ['c', 'd']
         };
-        element.nameValue = 'Test';
 
         flush(function() {
           var breadboxItems = Polymer.dom(element.root).querySelectorAll('breadbox-item');

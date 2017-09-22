@@ -50,66 +50,19 @@ var collection = {
 
     <style>
       :host {
-        display: block;
-        width: 100%;
-      }
-
-      .term {
-        /* Horizontally align the left of the breadbox-item with the left of the text in the collapsed view. */
-        /* Note that the breadbox-item elements have a default margin of 3px */
-        margin-left: 2px;
-      }
-
-      .styled-dialog-name,
-      .styled-dialog-text {
-        line-height: 30px;
-        margin-right: 5px;
-        /* Horizontally align the left of the text with the left of the breadbox-item in the collapsed view. */
-        margin-left: 5px;
-      }
-
-      iron-icon {
-        --iron-icon-height: 20px;
-        --iron-icon-width: 20px;
+        @apply --layout-horizontal;
+        @apply --layout-center;
       }
     </style>
 
-    <template is="dom-if" if="[[nameValue]]">
-      <div class="layout horizontal">
-        <div class="layout vertical">
-          <div class="styled-dialog-name">[[nameLabel]]</div>
-          <div class="styled-dialog-name">[[termLabel]]</div>
-        </div>
-        <div class="layout vertical">
-          <div class="layout horizontal center">
-            <div class="styled-dialog-text">[[nameValue]]</div>
-            <template is="dom-if" if="[[icon]]" restamp="true">
-              <iron-icon class$="[[iconStyleClass]]" icon="[[icon]]"></iron-icon>
-            </template>
-          </div>
-          <div class="layout wrap term">
-            <template is="dom-repeat" items="[[_getKeys(collection.*)]]" as="key">
-              <template is="dom-repeat" items="[[_getList(key, collection.*)]]">
-                <breadbox-item text="[[key]]: [[item]]" title$="[[key]]: [[item]]"></breadbox-item>
-              </template>
-            </template>
-          </div>
-        </div>
-      </div>
-    </template>
-
-    <template is="dom-if" if="[[!nameValue]]">
-      <div class="layout horizontal">
-        <div class="styled-dialog-name">[[termLabel]]</div>
-        <div class="layout wrap term">
-          <template is="dom-repeat" items="[[_getKeys(collection.*)]]" as="key">
-            <template is="dom-repeat" items="[[_getList(key, collection.*)]]">
-              <breadbox-item text="[[key]]: [[item]]" title$="[[key]]: [[item]]"></breadbox-item>
-            </template>
-          </template>
-        </div>
-      </div>
-    </template>
+    <div class="styled-dialog-name styled-dialog-right-space">Terms</div>
+    <div class="layout wrap term">
+      <template is="dom-repeat" items="[[_getKeys(collection.*)]]" as="key">
+        <template is="dom-repeat" items="[[_getList(key, collection.*)]]">
+          <breadbox-item text="[[key]]: [[item]]" title$="[[key]]: [[item]]"></breadbox-item>
+        </template>
+      </template>
+    </div>
   </template>
 
   <script>
@@ -128,61 +81,6 @@ var collection = {
          */
         collection: {
           type: Object
-        },
-
-        /**
-         * The name label to show if `nameValue` is defined.
-         *
-         * @type {String}
-         * @default 'Name'
-         */
-        nameLabel: {
-          type: String,
-          value: 'Name'
-        },
-
-        /**
-         * The name value to show (if any).
-         *
-         * @type {String}
-         * @default ''
-         */
-        nameValue: {
-          type: String,
-          value: ''
-        },
-
-        /**
-         * The icon to show with the `nameValue`.
-         *
-         * @type {String}
-         * @default ''
-         */
-        icon: {
-          type: String,
-          value: ''
-        },
-
-        /**
-         * The style class of the icon to set by `icon`.
-         *
-         * @type {String}
-         * @default ''
-         */
-        iconStyleClass: {
-          type: String,
-          value: ''
-        },
-
-        /**
-         * The term label to show.
-         *
-         * @type {String}
-         * @default 'Terms'
-         */
-        termLabel: {
-          type: String,
-          value: 'Term'
         }
       },
 
