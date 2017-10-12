@@ -51,11 +51,15 @@ var collection = {
     <style>
       :host {
         @apply --layout-horizontal;
-        @apply --layout-center;
+      }
+
+      .terms-label {
+        line-height: 30px;
+        min-height: 30px;
       }
     </style>
 
-    <div class="styled-dialog-name styled-dialog-right-space">Terms</div>
+    <div class="styled-dialog-name styled-dialog-right-space terms-label">Terms</div>
     <div class="layout wrap term">
       <template is="dom-repeat" items="[[_getKeys(collection.*)]]" as="key">
         <template is="dom-repeat" items="[[_getList(key, collection.*)]]">
