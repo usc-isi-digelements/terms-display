@@ -42,6 +42,7 @@ limitations under the License.
 
       test('does have correct default properties', function() {
         assert.isUndefined(element.collection);
+        assert.equal(element.label, 'Terms');
       });
 
       test('does not have breadbox-item if collection is not defined', function() {
@@ -89,44 +90,135 @@ limitations under the License.
       });
 
       test('_getKeys does work with empty collection', function() {
-        element.collection = {};
-        assert.deepEqual(element._getKeys(), []);
+        assert.deepEqual(element._getKeys({}), []);
       });
 
       test('_getKeys does work with single property collection', function() {
-        element.collection = {
+        assert.deepEqual(element._getKeys({
           one: []
-        };
-        assert.deepEqual(element._getKeys(), ['one']);
+        }), ['one']);
       });
 
       test('_getKeys does work with multiple property collection', function() {
-        element.collection = {
+        assert.deepEqual(element._getKeys({
           one: [],
           two: []
-        };
-        assert.deepEqual(element._getKeys(), ['one', 'two']);
+        }), ['one', 'two']);
       });
 
       test('_getList does work with unknown property', function() {
-        element.collection = {
+        assert.deepEqual(element._getList({
           one: []
-        };
-        assert.deepEqual(element._getList('two'), []);
+        }, 'two'), []);
       });
 
       test('_getList does work with empty list', function() {
-        element.collection = {
+        assert.deepEqual(element._getList({
           one: []
-        };
-        assert.deepEqual(element._getList('one'), []);
+        }, 'one'), []);
       });
 
       test('_getList does work with non-empty list', function() {
-        element.collection = {
+        assert.deepEqual(element._getList({
           one: ['a', 'b']
-        };
-        assert.deepEqual(element._getList('one'), ['a', 'b']);
+        }, 'one'), ['a', 'b']);
+      });
+
+      test('_getProperty does work', function() {
+        assert.equal(element._getProperty({
+          property: 'abc'
+        }, 'property'), 'abc');
+        assert.equal(element._getProperty({
+          property: 123
+        }, 'property'), 123);
+        assert.deepEqual(element._getProperty({
+          property: ['abc', 123]
+        }, 'property'), ['abc', 123]);
+        assert.deepEqual(element._getProperty({
+          property: {
+            key: 'value'
+          }
+        }, 'property'), {
+          key: 'value'
+        });
+        assert.isTrue(element._getProperty({
+          property: true
+        }, 'property'));
+        assert.isFalse(element._getProperty({
+          property: false
+        }, 'property'));
+        assert.isNull(element._getProperty({
+          property: null
+        }, 'property'));
+        assert.isUndefined(element._getProperty({
+          property: undefined
+        }, 'property'));
+      });
+
+      test('_getProperty does work with unknown property', function() {
+        assert.isUndefined(element._getProperty({}, 'property'));
+      });
+
+      test('_isBool does work with true', function() {
+        assert.isTrue(element._isBool({
+          property: true
+        }, 'property'));
+      });
+
+      test('_isBool does work with false', function() {
+        assert.isTrue(element._isBool({
+          property: false
+        }, 'property'));
+      });
+
+      test('_isBool does work with non-boolean', function() {
+        assert.isFalse(element._isBool({
+          property: 'abc'
+        }, 'property'));
+        assert.isFalse(element._isBool({
+          property: 123
+        }, 'property'));
+        assert.isFalse(element._isBool({
+          property: []
+        }, 'property'));
+        assert.isFalse(element._isBool({
+          property: {}
+        }, 'property'));
+      });
+
+      test('_isBool does work with unknown property', function() {
+        assert.isFalse(element._isBool({}, 'property'));
+      });
+
+      test('_isList does work with empty list', function() {
+        assert.isTrue(element._isList({
+          property: []
+        }, 'property'));
+      });
+
+      test('_isList does work with non-empty list', function() {
+        assert.isTrue(element._isList({
+          property: [1, 2, 3, 4, 5]
+        }, 'property'));
+      });
+
+      test('_isList does work with non-list', function() {
+        assert.isFalse(element._isList({
+          property: 'abc'
+        }, 'property'));
+        assert.isFalse(element._isList({
+          property: 123
+        }, 'property'));
+        assert.isFalse(element._isList({
+          property: true
+        }, 'property'));
+        assert.isFalse(element._isList({
+          property: {}
+        }, 'property'));
+      });
+
+      test('_isList does work with empty list', function() {
+        assert.isFalse(element._isList({}, 'property'));
       });
     });
   </script>

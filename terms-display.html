@@ -40,6 +40,14 @@ var collection = {
 </terms-display>
 ```
 
+### Styling
+
+`<terms-display>` provides the following custom properties and mixins for styling:
+
+Custom property                     | Description                       | Default
+------------------------------------|-----------------------------------|--------
+`--terms-display-label-style-mixin` | Custom style mixin for the label. | none
+
 @demo demo/index.html
 -->
 
@@ -56,14 +64,27 @@ var collection = {
       .terms-label {
         line-height: 30px;
         min-height: 30px;
+        @apply --terms-display-label-style-mixin;
       }
     </style>
 
-    <div class="styled-dialog-name styled-dialog-right-space terms-label">Terms</div>
-    <div class="layout wrap term">
-      <template is="dom-repeat" items="[[_getKeys(collection.*)]]" as="key">
-        <template is="dom-repeat" items="[[_getList(key, collection.*)]]">
-          <breadbox-item text="[[key]]: [[item]]" title$="[[key]]: [[item]]"></breadbox-item>
+    <div class="styled-dialog-name styled-dialog-right-space terms-label">[[label]]</div>
+    <div class="layout horizontal flex wrap term">
+      <template is="dom-repeat" items="[[_getKeys(collection, collection.*)]]" as="key">
+        <template is="dom-if" if="[[_isList(collection, key, collection.*)]]">
+          <template is="dom-repeat" items="[[_getList(collection, key, collection.*)]]">
+            <breadbox-item text="[[key]]: [[item]]" title$="[[key]]: [[item]]"></breadbox-item>
+          </template>
+        </template>
+        <template is="dom-if" if="[[!_isList(collection, key, collection.*)]]">
+          <template is="dom-if" if="[[_isBool(collection, key, collection.*)]]">
+            <template is="dom-if" if="[[_getProperty(collection, key)]]">
+              <breadbox-item text="[[key]]" title$="[[key]]"></breadbox-item>
+            </template>
+          </template>
+          <template is="dom-if" if="[[!_isBool(collection, key, collection.*)]]">
+            <breadbox-item text="[[key]]: [[_getProperty(collection, key)]]" title$="[[key]]: [[_getProperty(collection, key)]]"></breadbox-item>
+          </template>
         </template>
       </template>
     </div>
@@ -85,28 +106,77 @@ var collection = {
          */
         collection: {
           type: Object
+        },
+
+        /**
+         * The label.
+         *
+         * @type {String}
+         * @default 'Terms'
+         */
+        label: {
+          type: String,
+          value: 'Terms'
         }
       },
 
       /**
        * Returns all the collection keys.
        *
+       * @param {Object} collection
        * @return {Array}
        * @private
        */
-      _getKeys: function() {
-        return _.keys(this.collection);
+      _getKeys: function(collection) {
+        return _.keys(collection);
       },
 
       /**
        * Returns the collection value for the given key.
        *
+       * @param {Object} collection
        * @param {String} key
        * @return {Object}
        * @private
        */
-      _getList: function(key) {
-        return (this.collection ? this.collection[key] : undefined) || [];
+      _getList: function(collection, key) {
+        return (collection ? collection[key] : undefined) || [];
+      },
+
+      /**
+       * Returns the object in the collection at the given key.
+       *
+       * @param {Object} collection
+       * @param {String} key
+       * @return {Object}
+       * @private
+       */
+      _getProperty: function(collection, key) {
+        return collection ? collection[key] : undefined;
+      },
+
+      /**
+       * Returns whether the collection at the given key is a boolean value.
+       *
+       * @param {Object} collection
+       * @param {String} key
+       * @return {Boolean}
+       * @private
+       */
+      _isBool: function(collection, key) {
+        return _.isBoolean(collection[key]);
+      },
+
+      /**
+       * Returns whether the collection at the given key is a list.
+       *
+       * @param {Object} collection
+       * @param {String} key
+       * @return {Boolean}
+       * @private
+       */
+      _isList: function(collection, key) {
+        return _.isArray(collection[key]);
       }
     });
   })();

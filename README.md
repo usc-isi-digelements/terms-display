@@ -17,6 +17,14 @@ var collection = {
 </terms-display>
 ```
 
+### Styling
+
+`<terms-display>` provides the following custom properties and mixins for styling:
+
+Custom property                     | Description                       | Default
+------------------------------------|-----------------------------------|--------
+`--terms-display-label-style-mixin` | Custom style mixin for the label. | none
+
 ### Dependencies
 
 Dependencies are installed using [Bower](http://bower.io/):
