@@ -1,7 +1,7 @@
 {
   "name": "terms-display",
   "description": "A Polymer Element showing the keys and values of an object collection.",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "authors": ["Next Century Corporation"],
   "license": "Apache-2.0",
   "keywords": [

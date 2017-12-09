@@ -63,13 +63,21 @@ Custom property                     | Description                       | Defaul
 
       .terms-label {
         line-height: 30px;
+        margin-right: 10px;
         min-height: 30px;
         @apply --terms-display-label-style-mixin;
       }
+
+      breadbox-item {
+        margin: 3px 6px 3px 0;
+      }
     </style>
 
-    <div class="styled-dialog-name styled-dialog-right-space terms-label">[[label]]</div>
-    <div class="layout horizontal flex wrap term">
+    <template is="dom-if" if="[[label]]">
+      <div class="styled-dialog-text terms-label">[[label]]</div>
+    </template>
+
+    <div class="layout horizontal center flex wrap term">
       <template is="dom-repeat" items="[[_getKeys(collection, collection.*)]]" as="key">
         <template is="dom-if" if="[[_isList(collection, key, collection.*)]]">
           <template is="dom-repeat" items="[[_getList(collection, key, collection.*)]]">
